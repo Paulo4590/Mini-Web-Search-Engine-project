@@ -1,0 +1,164 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 20px 48px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+h1 {
+    margin: 0 0 8px;
+    font-size: 2.2rem;
+}
+
+.subtitle {
+    margin: 0;
+    color: #6b7280;
+}
+
+.search-box {
+    background: white;
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+    margin-bottom: 20px;
+}
+
+.search-box form {
+    display: flex;
+    gap: 12px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 14px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    font-size: 1rem;
+}
+
+.search-box button {
+    padding: 14px 22px;
+    border: none;
+    border-radius: 12px;
+    background: #2563eb;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.search-box button:hover {
+    background: #1d4ed8;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.stat-label {
+    display: block;
+    color: #6b7280;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.stat-value {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.results-section h2,
+.welcome-box h2 {
+    margin-top: 0;
+}
+
+.results-count {
+    color: #6b7280;
+    margin-bottom: 18px;
+}
+
+.result-card,
+.welcome-box,
+.empty-state {
+    background: white;
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    margin-bottom: 16px;
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.result-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.score {
+    background: #eff6ff;
+    color: #1d4ed8;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.meta {
+    color: #6b7280;
+    font-size: 0.95rem;
+}
+
+.result-text {
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+mark {
+    background: #fde68a;
+    padding: 0 2px;
+    border-radius: 3px;
+}
+
+ul {
+    line-height: 1.8;
+}
+
+@media (max-width: 700px) {
+    .search-box form,
+    .result-header {
+        flex-direction: column;
+    }
+
+    .search-box button {
+        width: 100%;
+    }
+}

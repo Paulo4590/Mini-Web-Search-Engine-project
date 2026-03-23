@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Web Search Engine</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Mini Web Search Engine</h1>
+            <p class="subtitle">Pure Python + Inverted Index + BM25 + Flask</p>
+        </header>
+
+        <section class="search-box">
+            <form method="GET" action="/">
+                <input
+                    type="text"
+                    name="q"
+                    placeholder="Type your query..."
+                    value="{{ query }}"
+                    autofocus
+                >
+                <button type="submit">Search</button>
+            </form>
+        </section>
+
+        <section class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-label">Indexed documents</span>
+                <span class="stat-value">{{ (payload.stats.total_documents if payload else stats.total_documents) }}</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Vocabulary size</span>
+                <span class="stat-value">{{ (payload.stats.vocabulary_size if payload else stats.vocabulary_size) }}</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Average doc length</span>
+                <span class="stat-value">{{ (payload.stats.avg_doc_length if payload else stats.avg_doc_length) }}</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Search time (ms)</span>
+                <span class="stat-value">{{ (payload.stats.search_time_ms if payload else 0) }}</span>
+            </div>
+        </section>
+
+        {% if payload %}
+            <section class="results-section">
+                <h2>Results for "{{ payload.query }}"</h2>
+                <p class="results-count">{{ payload.results|length }} result(s) shown</p>
+
+                {% if payload.results %}
+                    {% for result in payload.results %}
+                        <article class="result-card">
+                            <div class="result-header">
+                                <h3>{{ result.title }}</h3>
+                                <span class="score">BM25: {{ result.score }}</span>
+                            </div>
+                            <p class="meta"><strong>ID:</strong> {{ result.doc_id }} | <strong>Source:</strong> {{ result.source }} | <strong>Category:</strong> {{ result.category }}</p>
+                            <div class="result-text">{{ result.highlighted_text | safe }}</div>
+                        </article>
+                    {% endfor %}
+                {% else %}
+                    <div class="empty-state">
+                        <p>No results found. Try different terms.</p>
+                    </div>
+                {% endif %}
+            </section>
+        {% else %}
+            <section class="welcome-box">
+                <h2>How to use</h2>
+                <p>Type a query in the search bar and the engine will rank documents using BM25.</p>
+                <ul>
+                    <li>Supports tokenization, lowercasing, stop word removal, and stemming</li>
+                    <li>Uses an inverted index with posting lists</li>
+                    <li>Shows ranked results with BM25 score</li>
+                    <li>Highlights query terms inside each result</li>
+                </ul>
+            </section>
+        {% endif %}
+    </div>
+</body>
+</html>
